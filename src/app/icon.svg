@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VeciApp icon">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#g)" />
+  <path d="M17 35c0-8 6.2-14 15-14s15 6 15 14-6.2 14-15 14c-3.5 0-6.6-1-9.1-2.8l-6.9 2 2.7-7.2C17.2 39.4 17 37.3 17 35Z" fill="#FBBF24" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M27.5 33.5h9m-9 5h5" stroke="#111827" stroke-width="3" stroke-linecap="round" />
+</svg>
