@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FC, useState } from "react";
 import { Info, MessageCircleMore, ShieldCheck } from "lucide-react";
 import StarsRating from "./StarsRating";
@@ -15,13 +16,13 @@ const ProfessionalCard: FC<{ professional: Professional }> = ({ professional }) 
 
   return (
     <article
-      className="card-premium group relative flex min-h-[260px] flex-col gap-4"
+      className="card-premium group relative flex min-h-[280px] flex-col gap-4"
       onMouseEnter={() => setShowTestimonials(true)}
       onMouseLeave={() => setShowTestimonials(false)}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="relative h-16 w-16 overflow-hidden rounded-full ring-2 ring-white/20">
+          <div className="relative h-[72px] w-[72px] overflow-hidden rounded-full ring-2 ring-white/20">
             <div
               className="h-full w-full bg-cover bg-center"
               style={{ backgroundImage: `url(${professional.avatar ?? avatarFallback})` }}
@@ -62,10 +63,16 @@ const ProfessionalCard: FC<{ professional: Professional }> = ({ professional }) 
         <button className="inline-flex flex-1 items-center justify-center rounded-full bg-emerald-400 px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow transition hover:-translate-y-0.5 hover:bg-emerald-300">
           Contactar
         </button>
+        <Link
+          href={`/profesionales/${professional.id}`}
+          className="inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
+        >
+          Ver perfil
+        </Link>
         {testimonial ? (
           <button
             onClick={() => setShowTestimonials((prev) => !prev)}
-            className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
+            className="hidden items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20 sm:flex"
           >
             <MessageCircleMore className="h-4 w-4 text-highlight" /> Opiniones
           </button>

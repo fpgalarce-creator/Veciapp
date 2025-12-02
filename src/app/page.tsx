@@ -365,32 +365,32 @@ export default function HomePage() {
 
     return (
       <div className="grid h-full items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="flex flex-col justify-between gap-6">
-          <div className="space-y-4">
+        <div className="flex h-full flex-col justify-between gap-6">
+          <div className="space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-highlight ring-1 ring-white/10">
               Nueva era VeciApp
             </div>
-            <h1 className="max-w-[680px] text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+            <h1 className="max-w-[760px] text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
               {slide.title}
             </h1>
-            <p className="max-w-2xl text-base text-white/80 sm:text-lg">{slide.description}</p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <div className="flex flex-1 items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/10">
+            <p className="max-w-3xl text-base leading-relaxed text-white/85 sm:text-lg">{slide.description}</p>
+            <div className="grid gap-3 lg:grid-cols-[1.2fr_auto]">
+              <div className="flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-4 ring-1 ring-white/15">
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="¿Qué necesitas hoy?"
                   className="w-full bg-transparent text-base text-white placeholder:text-white/50 focus:outline-none"
                 />
-                <button className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow">
+                <button className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-brand-navy shadow-[0_0_22px_rgba(14,165,233,0.55)] transition hover:-translate-y-0.5 hover:shadow-[0_0_26px_rgba(14,165,233,0.75)]">
                   Buscar
                 </button>
               </div>
-              <div className="flex flex-wrap gap-3 text-sm font-semibold">
+              <div className="flex flex-wrap items-center gap-3 text-sm font-semibold">
                 {session && (
                   <Link
                     href="/publicar"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-highlight px-5 py-3 text-brand-navy ring-1 ring-white/15"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-highlight px-5 py-3 text-brand-navy shadow-[0_0_24px_rgba(14,165,233,0.35)] ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:shadow-[0_0_26px_rgba(14,165,233,0.6)]"
                   >
                     Publicar tarea
                     <ArrowRight className="h-4 w-4" />
@@ -398,7 +398,7 @@ export default function HomePage() {
                 )}
                 <Link
                   href="/ofrecer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-5 py-3 text-white ring-1 ring-white/15"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-5 py-3 text-white shadow-[0_0_20px_rgba(255,255,255,0.12)] ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(255,255,255,0.22)]"
                 >
                   Ofrecer mis servicios
                 </Link>
@@ -417,20 +417,30 @@ export default function HomePage() {
             </span>
           </div>
         </div>
-        <div className="card-premium relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-highlight/10 to-transparent" aria-hidden />
-          <div className="relative space-y-4">
-            <h3 className="text-lg font-semibold text-white">Activación rápida</h3>
-            <div className="space-y-3 text-sm text-white/80">
+        <div className="relative flex h-full flex-col overflow-hidden rounded-[26px] border border-emerald-300/25 bg-emerald-400/10 p-6 shadow-[0_25px_60px_rgba(6,182,212,0.25)] backdrop-blur-xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/15 via-transparent to-cyan-400/10" aria-hidden />
+          <div className="relative flex h-full flex-col justify-between space-y-5">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-semibold text-white">Activación rápida</h3>
+              <span className="rounded-full bg-emerald-500/12 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/30 shadow-[0_0_18px_rgba(16,185,129,0.35)]">
+                Live beta
+              </span>
+            </div>
+            <div className="space-y-3 text-sm text-white/85">
               <p>1. Crea tu perfil con reputación real.</p>
               <p>2. Define tu disponibilidad y cobertura.</p>
               <p>3. Conecta con vecis confiables y cobra sin esperas.</p>
             </div>
-            <div className="flex items-center gap-3 rounded-2xl bg-white/5 p-4 text-sm text-white">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 text-primary">24/7</div>
-              <div>
-                <p className="font-semibold text-white">Atención premium</p>
-                <p className="text-white/70">Tu comunidad, siempre contigo.</p>
+            <div className="space-y-3 rounded-2xl border border-emerald-300/25 bg-emerald-500/10 p-4 shadow-[0_12px_40px_rgba(16,185,129,0.25)]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-400/40 shadow-[0_0_25px_rgba(16,185,129,0.45)]">
+                24/7 Atención premium
+              </div>
+              <div className="flex items-center gap-3 rounded-2xl bg-white/5 p-4 text-sm text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/30 text-brand-navy">24/7</div>
+                <div>
+                  <p className="font-semibold text-white">Soporte humano + IA</p>
+                  <p className="text-white/75">Tu comunidad, siempre contigo.</p>
+                </div>
               </div>
             </div>
           </div>

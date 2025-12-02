@@ -33,9 +33,9 @@ const ServiceCard: FC<{ service: Service }> = ({ service }) => {
   };
 
   return (
-    <article className="card-premium flex min-h-[320px] flex-col gap-4 overflow-hidden">
+    <article className="card-premium flex h-full min-h-[340px] flex-col gap-4 overflow-hidden">
       <div className="flex items-start justify-between gap-3">
-        <div className="space-y-1">
+        <div className="space-y-2">
           <p className="text-xs uppercase tracking-wide text-white/70">{service.category}</p>
           <h3 className="max-w-[680px] text-2xl font-semibold leading-tight text-white">{service.title}</h3>
           <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs text-white/80 ring-1 ring-white/15">
@@ -54,44 +54,46 @@ const ServiceCard: FC<{ service: Service }> = ({ service }) => {
         </div>
         <span className={`badge ${statusStyles[service.status]} text-xs`}>{service.status}</span>
       </div>
-      <div className="grid gap-3 md:grid-cols-[1.05fr_0.95fr]">
-        <div className="grid grid-cols-2 gap-3 text-sm text-white/80">
-          <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
-            <p className="font-semibold text-white">Sector</p>
-            <p>{service.sector}</p>
-          </div>
-          <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
-            <p className="font-semibold text-white">Fecha / hora</p>
-            <p>{service.datetime}</p>
-          </div>
-          <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
-            <p className="font-semibold text-white">Rango</p>
-            <p>{service.priceRange}</p>
-          </div>
-          <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
-            <p className="font-semibold text-white">Estado</p>
-            <p className="text-sm">{service.status}</p>
-          </div>
-        </div>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/10 via-white/0 to-white/5 ring-1 ring-white/10">
-          {service.image ? (
-            <div
-              className="h-full min-h-[180px] w-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${service.image})` }}
-              role="img"
-              aria-label={service.title}
-            />
-          ) : (
-            <div className="flex h-full min-h-[180px] flex-col items-center justify-center gap-2 bg-gradient-to-br from-slate-900/60 via-slate-800/40 to-slate-900/60 text-white/70">
-              <ImageOff className="h-10 w-10" />
-              <p className="text-sm">Espacio reservado para fotos de la tarea</p>
+      <div className="flex flex-1 flex-col gap-3">
+        <div className="grid gap-3 md:grid-cols-[1.05fr_0.95fr]">
+          <div className="grid grid-cols-2 gap-3 text-sm text-white/80">
+            <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
+              <p className="font-semibold text-white">Sector</p>
+              <p>{service.sector}</p>
             </div>
-          )}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), transparent 60%)" }}
-            aria-hidden
-          />
+            <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
+              <p className="font-semibold text-white">Fecha / hora</p>
+              <p>{service.datetime}</p>
+            </div>
+            <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
+              <p className="font-semibold text-white">Rango</p>
+              <p>{service.priceRange}</p>
+            </div>
+            <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
+              <p className="font-semibold text-white">Estado</p>
+              <p className="text-sm">{service.status}</p>
+            </div>
+          </div>
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/10 via-white/0 to-white/5 ring-1 ring-white/10">
+            {service.image ? (
+              <div
+                className="h-full min-h-[180px] w-full bg-cover bg-center"
+                style={{ backgroundImage: `url(${service.image})` }}
+                role="img"
+                aria-label={service.title}
+              />
+            ) : (
+              <div className="flex h-full min-h-[180px] flex-col items-center justify-center gap-2 bg-gradient-to-br from-slate-900/60 via-slate-800/40 to-slate-900/60 text-white/70">
+                <ImageOff className="h-10 w-10" />
+                <p className="text-sm">Espacio reservado para fotos de la tarea</p>
+              </div>
+            )}
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), transparent 60%)" }}
+              aria-hidden
+            />
+          </div>
         </div>
       </div>
       <div className="mt-auto flex flex-wrap items-center gap-3 pt-1">

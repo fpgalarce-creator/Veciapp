@@ -31,24 +31,12 @@ body.theme-dark {
 
 body.theme-galaxy {
   background:
-    radial-gradient(circle at 16% 18%, rgba(124, 58, 237, 0.15), transparent 38%),
-    radial-gradient(circle at 78% 12%, rgba(14, 165, 233, 0.2), transparent 42%),
-    radial-gradient(circle at 62% 68%, rgba(52, 211, 153, 0.16), transparent 40%),
-    linear-gradient(140deg, #050816 0%, #0b1027 48%, #060a1c 100%);
+    radial-gradient(circle at 22% 28%, rgba(94, 234, 212, 0.14), transparent 42%),
+    radial-gradient(circle at 74% 20%, rgba(129, 140, 248, 0.14), transparent 45%),
+    radial-gradient(circle at 32% 72%, rgba(52, 211, 153, 0.12), transparent 46%),
+    radial-gradient(circle at 78% 68%, rgba(59, 130, 246, 0.18), transparent 52%),
+    linear-gradient(145deg, #050816 0%, #0a1026 45%, #050917 100%);
   color: #e0f2fe;
-  animation: aurora 18s ease-in-out infinite;
-}
-
-@keyframes aurora {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 a {
@@ -71,39 +59,32 @@ a {
 .space-time-grid {
   pointer-events: none;
   background-image:
-    radial-gradient(520px circle at 14% 28%, rgba(99, 102, 241, 0.14), transparent 55%),
-    radial-gradient(460px circle at 78% 64%, rgba(45, 212, 191, 0.14), transparent 52%),
-    radial-gradient(360px circle at 38% 80%, rgba(236, 72, 153, 0.12), transparent 48%),
-    radial-gradient(780px circle at 50% 32%, rgba(59, 130, 246, 0.08), transparent 60%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(45deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    radial-gradient(780px circle at 18% 32%, rgba(129, 140, 248, 0.16), transparent 62%),
+    radial-gradient(640px circle at 82% 72%, rgba(34, 211, 238, 0.14), transparent 60%),
+    radial-gradient(540px circle at 32% 78%, rgba(52, 211, 153, 0.12), transparent 58%),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(50deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size:
     auto,
     auto,
     auto,
-    auto,
-    120px 120px,
-    120px 120px;
-  opacity: 0;
+    160px 160px,
+    160px 160px;
+  opacity: 0.65;
   mix-blend-mode: screen;
-  transition: opacity 0.7s ease, transform 1s ease;
-}
-
-.theme-galaxy .space-time-grid {
-  opacity: 0.55;
 }
 
 .space-time-warp-layer {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.65;
+  opacity: 0.7;
   mix-blend-mode: screen;
   background:
-    radial-gradient(1100px circle at 18% 30%, rgba(79, 70, 229, 0.18), transparent 52%),
-    radial-gradient(960px circle at 82% 62%, rgba(14, 165, 233, 0.15), transparent 50%),
-    radial-gradient(840px circle at 48% 82%, rgba(236, 72, 153, 0.1), transparent 48%),
-    radial-gradient(720px circle at 40% 22%, rgba(16, 185, 129, 0.08), transparent 55%);
+    radial-gradient(1200px circle at 22% 36%, rgba(99, 102, 241, 0.2), transparent 55%),
+    radial-gradient(980px circle at 78% 62%, rgba(16, 185, 129, 0.14), transparent 52%),
+    radial-gradient(960px circle at 40% 80%, rgba(59, 130, 246, 0.12), transparent 52%),
+    radial-gradient(820px circle at 68% 28%, rgba(94, 234, 212, 0.16), transparent 52%);
   mask-image:
     radial-gradient(circle at 25% 38%, rgba(255, 255, 255, 0.4) 0, transparent 45%),
     radial-gradient(circle at 78% 62%, rgba(255, 255, 255, 0.35) 0, transparent 40%),
