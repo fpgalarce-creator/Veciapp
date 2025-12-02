@@ -3,7 +3,8 @@
 import LocationFilters from "@/components/LocationFilters";
 import SectionTitle from "@/components/SectionTitle";
 import ServiceCard from "@/components/ServiceCard";
-import { services, ServiceStatus } from "@/data/services";
+import { ServiceStatus } from "@/data/services";
+import { useAppContext } from "@/context/AppContext";
 import { useMemo, useState } from "react";
 
 const categories = ["Todas", "Limpieza", "Mascotas", "Jardinería", "Educación", "Otros"] as const;
@@ -15,16 +16,17 @@ export default function ExplorePage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("Todas");
   const [status, setStatus] = useState<(typeof statuses)[number]>("Todos");
+  const { tasks } = useAppContext();
 
   const filtered = useMemo(
     () =>
-      services.filter((service) => {
+      tasks.filter((service) => {
         const matchesText = service.title.toLowerCase().includes(search.toLowerCase());
         const matchesCategory = category === "Todas" || service.category === category;
         const matchesStatus = status === "Todos" || service.status === status;
         return matchesText && matchesCategory && matchesStatus;
       }),
-    [search, category, status]
+    [search, category, status, tasks]
   );
 
   return (

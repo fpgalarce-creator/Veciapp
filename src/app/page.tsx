@@ -370,8 +370,10 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-highlight ring-1 ring-white/10">
               Nueva era VeciApp
             </div>
-            <h1 className="text-4xl font-extrabold leading-tight text-white lg:text-5xl">{slide.title}</h1>
-            <p className="max-w-xl text-lg text-white/80">{slide.description}</p>
+            <h1 className="max-w-[680px] text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+              {slide.title}
+            </h1>
+            <p className="max-w-2xl text-base text-white/80 sm:text-lg">{slide.description}</p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <div className="flex flex-1 items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/10">
                 <input
@@ -455,9 +457,9 @@ export default function HomePage() {
             </div>
           </div>
           <div className="space-y-10">
-            <div className="relative overflow-hidden rounded-[28px] shadow-inner-glow ring-1 ring-white/10">
+            <div className="relative overflow-hidden rounded-[28px] bg-white/5 shadow-2xl ring-1 ring-white/10">
               <div className="absolute inset-0 space-time-warp" aria-hidden />
-              <div className="relative min-h-[560px] rounded-[28px] bg-white/5 p-2 sm:p-3">
+              <div className="relative min-h-[560px] p-2 sm:p-4">
                 {slides.map((slide, index) => (
                   <div
                     key={slide.id}
