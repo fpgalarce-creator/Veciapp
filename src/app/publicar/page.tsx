@@ -1,7 +1,9 @@
 "use client";
 
 import SectionTitle from "@/components/SectionTitle";
-import { FormEvent, useState } from "react";
+import { useAppContext } from "@/context/AppContext";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 
 const initialForm = {
   title: "",
@@ -15,12 +17,24 @@ const initialForm = {
 };
 
 export default function PublishPage() {
+  const { session } = useAppContext();
+  const router = useRouter();
   const [form, setForm] = useState(initialForm);
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    if (!session) {
+      router.replace("/auth/login");
+    }
+  }, [router, session]);
+
+  if (!session) {
+    return <div className="text-center text-white">Redirigiendo a inicio de sesión...</div>;
+  }
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage("Tu tarea ha sido publicada (demo)");
+    setMessage("Tu tarea ha sido publicada");
     setForm(initialForm);
   };
 
@@ -113,7 +127,7 @@ export default function PublishPage() {
           </div>
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-text">Subir foto (demo)</label>
+          <label className="text-sm font-semibold text-text">Subir foto</label>
           <input
             type="file"
             onChange={(e) => setForm({ ...form, photo: e.target.value })}
@@ -121,7 +135,7 @@ export default function PublishPage() {
           />
         </div>
         <div className="flex items-center justify-between">
-          <p className="text-gray-600 text-sm">Tu contacto real se coordina por fuera (demo).</p>
+          <p className="text-gray-600 text-sm">Tu contacto real se coordina directamente con el veci asignado.</p>
           <button
             type="submit"
             className="rounded-xl bg-primary px-6 py-3 text-white font-semibold shadow-soft hover:bg-primary/90 transition"

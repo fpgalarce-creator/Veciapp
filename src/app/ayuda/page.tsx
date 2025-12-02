@@ -10,11 +10,11 @@ const faqs = [
   },
   {
     question: "¿Cómo contacto a la persona que realizará el servicio?",
-    answer: "Luego de publicar, puedes usar el botón de contactar (demo) y coordinar directamente con la persona.",
+    answer: "Luego de publicar, usa el botón de contactar y coordina directamente con la persona.",
   },
   {
     question: "¿Los pagos son en línea o en efectivo?",
-    answer: "La plataforma es demo, así que los pagos se coordinan entre las partes según prefieran.",
+    answer: "Los pagos se coordinan entre las partes según prefieran, con transparencia total.",
   },
   {
     question: "¿Qué pasa si el servicio sale mal?",

@@ -68,7 +68,7 @@ export default function ProfileDemoPage() {
             ))}
           </div>
           <button className="w-full rounded-xl bg-secondary px-4 py-3 text-white font-semibold shadow-soft hover:bg-secondary/90 transition">
-            Contactar (demo)
+            Contactar
           </button>
         </div>
       </div>

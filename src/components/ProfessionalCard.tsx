@@ -25,7 +25,7 @@ const ProfessionalCard: FC<{ professional: Professional }> = ({ professional }) 
         <StarsRating value={professional.rating} />
       </div>
       <button className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-white font-semibold hover:bg-primary/90 transition">
-        Contactar (demo)
+        Contactar
       </button>
     </article>
   );
