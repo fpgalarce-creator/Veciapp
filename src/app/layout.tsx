@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -26,13 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="bg-background">
+    <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-text antialiased`}
+        className={`${inter.variable} min-h-screen bg-brand-navy text-surface antialiased`}
       >
-        <Navbar />
-        <main className="mx-auto max-w-6xl px-4 pb-16 pt-6 md:pt-10">{children}</main>
-        <Footer />
+        <div className="absolute inset-0 bg-radial-grid opacity-70" aria-hidden />
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <Navbar />
+          <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-6 md:pt-10 lg:pt-14">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
