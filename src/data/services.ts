@@ -8,6 +8,8 @@ export type Service = {
   datetime: string;
   priceRange: string;
   status: ServiceStatus;
+  postedBy: string;
+  image?: string;
 };
 
 export const services: Service[] = [
@@ -19,6 +21,8 @@ export const services: Service[] = [
     datetime: "Sábado 10:00",
     priceRange: "$8.000 - $10.000",
     status: "Pendiente",
+    postedBy: "Carla",
+    image: "/images/services/car-wash.jpg",
   },
   {
     id: 2,
@@ -28,6 +32,8 @@ export const services: Service[] = [
     datetime: "Hoy 18:30",
     priceRange: "$5.000",
     status: "En curso",
+    postedBy: "Diego",
+    image: "/images/services/pet-walk.jpg",
   },
   {
     id: 3,
@@ -37,6 +43,7 @@ export const services: Service[] = [
     datetime: "Viernes 19:00",
     priceRange: "$20.000 - $30.000",
     status: "Pendiente",
+    postedBy: "Paula",
   },
   {
     id: 4,
@@ -46,6 +53,7 @@ export const services: Service[] = [
     datetime: "Sábado 12:00",
     priceRange: "$12.000",
     status: "Pendiente",
+    postedBy: "Sebastián",
   },
   {
     id: 5,
@@ -55,6 +63,8 @@ export const services: Service[] = [
     datetime: "Domingo 09:00",
     priceRange: "$18.000 - $22.000",
     status: "Completado",
+    postedBy: "Patricia",
+    image: "/images/services/garden.jpg",
   },
   {
     id: 6,
@@ -64,6 +74,7 @@ export const services: Service[] = [
     datetime: "Jueves 17:00",
     priceRange: "$15.000",
     status: "En curso",
+    postedBy: "Luis",
   },
   {
     id: 7,
@@ -73,6 +84,7 @@ export const services: Service[] = [
     datetime: "Sábado 16:00",
     priceRange: "$14.000",
     status: "Pendiente",
+    postedBy: "Camila",
   },
   {
     id: 8,
@@ -82,5 +94,6 @@ export const services: Service[] = [
     datetime: "Miércoles 09:00",
     priceRange: "$35.000 - $40.000",
     status: "Pendiente",
+    postedBy: "Anita",
   },
 ];

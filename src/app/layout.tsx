@@ -23,6 +23,8 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.variable} min-h-screen bg-base text-surface antialiased theme-galaxy`}>
+        <div className="space-time-warp-layer" aria-hidden />
+        <div className="space-time-grid fixed inset-0 -z-10" aria-hidden />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
