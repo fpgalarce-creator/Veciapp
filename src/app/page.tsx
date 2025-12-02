@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
-  Building2,
   HandCoins,
   HeartHandshake,
   LocateFixed,
@@ -13,6 +12,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
+import CircularEconomySteps from "@/components/CircularEconomySteps";
 import { useAppContext } from "@/context/AppContext";
 
 const tasks = [
@@ -217,7 +217,7 @@ export default function HomePage() {
   const renderSlide = (slide: Slide) => {
     if (slide.variant === "services") {
       return (
-        <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid h-full items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-between gap-6">
             <div className="space-y-3">
               <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-highlight ring-1 ring-white/10">
@@ -271,7 +271,7 @@ export default function HomePage() {
 
     if (slide.variant === "oficios") {
       return (
-        <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid h-full items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-between gap-6">
             <div className="space-y-3">
               <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-highlight ring-1 ring-white/10">
@@ -321,7 +321,7 @@ export default function HomePage() {
 
     if (slide.variant === "pymes") {
       return (
-        <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid h-full items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-between gap-6">
             <div className="space-y-3">
               <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-highlight ring-1 ring-white/10">
@@ -364,7 +364,7 @@ export default function HomePage() {
     }
 
     return (
-      <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="grid h-full items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="flex flex-col justify-between gap-6">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-highlight ring-1 ring-white/10">
@@ -455,52 +455,48 @@ export default function HomePage() {
             </div>
           </div>
           <div className="space-y-10">
-            {renderSlide(slides[activeSlide])}
-            <div className="flex items-center justify-between">
-              <div className="flex gap-2">
+            <div className="relative overflow-hidden rounded-[28px] shadow-inner-glow ring-1 ring-white/10">
+              <div className="absolute inset-0 space-time-warp" aria-hidden />
+              <div className="relative min-h-[560px] rounded-[28px] bg-white/5 p-2 sm:p-3">
                 {slides.map((slide, index) => (
-                  <button
+                  <div
                     key={slide.id}
-                    onClick={() => setActiveSlide(index)}
-                    className={`h-2 w-10 rounded-full transition ${
-                      index === activeSlide ? "bg-white" : "bg-white/30 hover:bg-white/60"
+                    className={`absolute inset-0 transition-opacity duration-700 ${
+                      index === activeSlide ? "opacity-100" : "opacity-0"
                     }`}
-                    aria-label={`Ir a slide ${index + 1}`}
-                  />
+                    aria-hidden={index !== activeSlide}
+                  >
+                    <div className="flex h-full flex-col rounded-[24px] bg-gradient-to-br from-white/5 via-white/0 to-white/10 p-4 sm:p-6">
+                      <div className="flex-1">
+                        {renderSlide(slide)}
+                      </div>
+                      <div className="mt-6 flex items-center justify-between">
+                        <div className="flex gap-2 rounded-full bg-white/5 p-2 ring-1 ring-white/10">
+                          {slides.map((slideItem, controlIndex) => (
+                            <button
+                              key={slideItem.id}
+                              onClick={() => setActiveSlide(controlIndex)}
+                              className={`h-2 w-10 rounded-full transition ${
+                                controlIndex === activeSlide ? "bg-white" : "bg-white/30 hover:bg-white/60"
+                              }`}
+                              aria-label={`Ir a slide ${controlIndex + 1}`}
+                            />
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-3 rounded-full bg-white/5 px-4 py-2 text-sm text-white/80 ring-1 ring-white/10">
+                          <LocateFixed className="h-4 w-4" /> Filtrado por {location.city} • {location.villa}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </div>
-              <div className="flex items-center gap-3 text-sm text-white/80">
-                <LocateFixed className="h-4 w-4" /> Filtrado por {location.city} • {location.villa}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="space-y-8 rounded-[30px] bg-white/5 p-8 shadow-xl backdrop-blur-xl ring-1 ring-white/10">
-        <div className="flex flex-col gap-2 text-center">
-          <p className="text-sm font-semibold text-highlight">Economía circular aplicada</p>
-          <h2 className="text-3xl font-bold text-white">Sigue tres pasos simples</h2>
-          <p className="text-muted">Publica, conecta y reciproca para fortalecer la confianza en tu barrio.</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          <StepCard
-            icon={Sparkles}
-            title="1️⃣ Publica"
-            description="Cuenta lo que necesitas o el servicio que ofreces con transparencia y estilo."
-          />
-          <StepCard
-            icon={Building2}
-            title="2️⃣ Conecta"
-            description="Encuentra vecinos confiables con buena reputación y ubicación precisa."
-          />
-          <StepCard
-            icon={HeartHandshake}
-            title="3️⃣ Reciproca"
-            description="Evalúa, mejora la comunidad y fortalece la economía local con cada intercambio."
-          />
-        </div>
-      </section>
+      <CircularEconomySteps className="shadow-2xl" StepCardComponent={StepCard} />
 
       <section className="space-y-6">
         <div className="flex flex-col gap-2">
