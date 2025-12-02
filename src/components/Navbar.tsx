@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, ChevronDown, LogIn, MapPin, MoonStar, Sparkles, SunMedium, UserRound } from "lucide-react";
+import { ChevronDown, LogIn, MoonStar, Sparkles, SunMedium, UserRound } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -9,22 +9,10 @@ import { useAppContext } from "@/context/AppContext";
 const links = [
   { href: "/", label: "Inicio" },
   { href: "/explorar", label: "Explorar" },
-  { href: "/pymes", label: "Negocios" },
+  { href: "/pymes", label: "PYMEs" },
   { href: "/profesionales", label: "Profesionales" },
   { href: "/como-funciona", label: "Cómo funciona" },
 ];
-
-const cities = [
-  "Rancagua",
-  "Machalí",
-  "Graneros",
-];
-
-const villasByCity: Record<string, string[]> = {
-  Rancagua: ["Villa Triana", "Centro", "Alameda", "El Tenis", "Villa Cordillera"],
-  Machalí: ["San Damián", "La Vinilla", "El Polo", "Valle Hermoso"],
-  Graneros: ["Doñihue", "Las Brisas", "Lo Castillo"],
-};
 
 const themes = [
   { value: "light", label: "Modo claro", icon: SunMedium },
@@ -36,9 +24,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showTheme, setShowTheme] = useState(false);
   const pathname = usePathname();
-  const { location, setLocation, theme, setTheme, session } = useAppContext();
-
-  const villas = villasByCity[location.city] ?? [];
+  const { theme, setTheme, session } = useAppContext();
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-xl">
@@ -53,47 +39,6 @@ const Navbar = () => {
               <span className="text-lg font-bold text-white">Conecta & resuelve</span>
             </div>
           </Link>
-
-          <div className="hidden flex-1 items-center justify-center gap-6 xl:flex">
-            <div className="flex items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-white ring-1 ring-white/15">
-              <MapPin className="h-5 w-5 text-primary" />
-              <div className="flex flex-col">
-                <span className="text-xs text-muted">Ciudad</span>
-                <select
-                  value={location.city}
-                  onChange={(e) => {
-                    const nextCity = e.target.value;
-                    const nextVillas = villasByCity[nextCity] ?? villas;
-                    setLocation({ city: nextCity, villa: nextVillas[0] ?? location.villa });
-                  }}
-                  className="bg-transparent text-sm font-semibold focus:outline-none"
-                >
-                  {cities.map((city) => (
-                    <option key={city} value={city} className="bg-slate-900">
-                      {city}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-white ring-1 ring-white/15">
-              <Building2 className="h-5 w-5 text-highlight" />
-              <div className="flex flex-col">
-                <span className="text-xs text-muted">Villa / Condominio</span>
-                <select
-                  value={location.villa}
-                  onChange={(e) => setLocation({ ...location, villa: e.target.value })}
-                  className="bg-transparent text-sm font-semibold focus:outline-none"
-                >
-                  {villas.map((villa) => (
-                    <option key={villa} value={villa} className="bg-slate-900">
-                      {villa}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
 
           <nav className="hidden items-center gap-2 lg:flex">
             {links.map((link) => {
@@ -146,28 +91,30 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <Link
-              href="/explorar"
-              className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              Explorar
-            </Link>
-            {session ? (
-              <Link
-                href="/publicar"
-                className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow hover:bg-primary-dark"
-              >
-                Publicar tarea
-              </Link>
-            ) : (
-              <Link
-                href="/auth/login"
-                className="rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/20 hover:bg-white/25"
-              >
-                Iniciar sesión
-              </Link>
-            )}
-          </div>
+              {session ? (
+                <Link
+                  href="/perfil-demo"
+                  className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  Mi perfil
+                </Link>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  className="rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/20 hover:bg-white/25"
+                >
+                  Iniciar sesión
+                </Link>
+              )}
+              {session?.role === "admin" && (
+                <Link
+                  href="/admin"
+                  className="rounded-full bg-highlight px-4 py-2 text-sm font-semibold text-brand-navy ring-1 ring-white/20 shadow-glow"
+                >
+                  Panel admin (demo)
+                </Link>
+              )}
+            </div>
 
           <button
             onClick={() => setOpen((prev) => !prev)}
@@ -187,45 +134,6 @@ const Navbar = () => {
         <div className="mx-auto mt-2 max-w-6xl px-4 lg:hidden">
           <div className="rounded-2xl bg-white/10 p-4 text-white shadow-xl ring-1 ring-white/10">
             <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl bg-white/10 p-3 ring-1 ring-white/15">
-                  <div className="flex items-center gap-2 text-sm font-semibold">
-                    <MapPin className="h-4 w-4 text-primary" /> Ciudad
-                  </div>
-                  <select
-                    value={location.city}
-                    onChange={(e) => {
-                      const nextCity = e.target.value;
-                      const nextVillas = villasByCity[nextCity] ?? villas;
-                      setLocation({ city: nextCity, villa: nextVillas[0] ?? location.villa });
-                    }}
-                    className="mt-2 w-full rounded-xl bg-white/5 px-3 py-2 text-sm font-semibold focus:outline-none"
-                  >
-                    {cities.map((city) => (
-                      <option key={city} value={city} className="bg-slate-900">
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="rounded-2xl bg-white/10 p-3 ring-1 ring-white/15">
-                  <div className="flex items-center gap-2 text-sm font-semibold">
-                    <Building2 className="h-4 w-4 text-highlight" /> Villa / Condominio
-                  </div>
-                  <select
-                    value={location.villa}
-                    onChange={(e) => setLocation({ ...location, villa: e.target.value })}
-                    className="mt-2 w-full rounded-xl bg-white/5 px-3 py-2 text-sm font-semibold focus:outline-none"
-                  >
-                    {villas.map((villa) => (
-                      <option key={villa} value={villa} className="bg-slate-900">
-                        {villa}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
               {links.map((link) => {
                 const active = pathname === link.href;
                 return (
@@ -260,11 +168,11 @@ const Navbar = () => {
               <div className="mt-2 flex flex-col gap-2">
                 {session ? (
                   <Link
-                    href="/publicar"
-                    className="rounded-xl bg-primary px-4 py-3 text-center text-sm font-semibold text-brand-navy shadow-glow"
+                    href="/perfil-demo"
+                    className="rounded-xl border border-white/10 px-4 py-3 text-center text-sm font-semibold"
                     onClick={() => setOpen(false)}
                   >
-                    Publicar tarea
+                    Mi perfil
                   </Link>
                 ) : (
                   <Link
@@ -277,13 +185,15 @@ const Navbar = () => {
                     </span>
                   </Link>
                 )}
-                <Link
-                  href="/explorar"
-                  className="rounded-xl border border-white/10 px-4 py-3 text-center text-sm font-semibold"
-                  onClick={() => setOpen(false)}
-                >
-                  Explorar
-                </Link>
+                {session?.role === "admin" && (
+                  <Link
+                    href="/admin"
+                    className="rounded-xl bg-highlight px-4 py-3 text-center text-sm font-semibold text-brand-navy ring-1 ring-white/20"
+                    onClick={() => setOpen(false)}
+                  >
+                    Panel admin (demo)
+                  </Link>
+                )}
                 {session && (
                   <div className="flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2 text-xs text-muted">
                     <UserRound className="h-4 w-4" />

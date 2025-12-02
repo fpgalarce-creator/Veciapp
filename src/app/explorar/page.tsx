@@ -1,5 +1,6 @@
 "use client";
 
+import LocationFilters from "@/components/LocationFilters";
 import SectionTitle from "@/components/SectionTitle";
 import ServiceCard from "@/components/ServiceCard";
 import { services, ServiceStatus } from "@/data/services";
@@ -32,21 +33,22 @@ export default function ExplorePage() {
         title="Explorar servicios publicados"
         subtitle="Filtra por categoría, estado o busca por texto"
       />
+      <LocationFilters />
       <div className="section-card space-y-4">
         <div className="grid gap-3 md:grid-cols-3">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por título o palabra clave"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 focus:border-secondary focus:outline-none"
+            className="w-full rounded-2xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 placeholder:text-white/70 focus:outline-none"
           />
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as CategoryFilter)}
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 focus:border-secondary focus:outline-none"
+            className="w-full rounded-2xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 focus:outline-none"
           >
             {categories.map((item) => (
-              <option key={item} value={item}>
+              <option key={item} value={item} className="bg-slate-900">
                 {item}
               </option>
             ))}
@@ -54,10 +56,10 @@ export default function ExplorePage() {
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as (typeof statuses)[number])}
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 focus:border-secondary focus:outline-none"
+            className="w-full rounded-2xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 focus:outline-none"
           >
             {statuses.map((item) => (
-              <option key={item} value={item}>
+              <option key={item} value={item} className="bg-slate-900">
                 {item}
               </option>
             ))}

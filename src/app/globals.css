@@ -88,9 +88,21 @@ a {
   @apply rounded-3xl bg-white/5 shadow-2xl backdrop-blur-xl ring-1 ring-white/10;
 }
 
-.bg-radial-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.09) 1px, transparent 0);
-  background-size: 24px 24px;
+
+.space-time-grid {
+  pointer-events: none;
+  background-image:
+    radial-gradient(480px circle at 18% 32%, rgba(99, 102, 241, 0.18), transparent 55%),
+    radial-gradient(380px circle at 72% 65%, rgba(45, 212, 191, 0.18), transparent 50%),
+    radial-gradient(320px circle at 30% 75%, rgba(236, 72, 153, 0.12), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07) 1px, transparent 1px, transparent 70px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06) 1px, transparent 1px, transparent 70px);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.theme-galaxy .space-time-grid {
+  opacity: 0.6;
 }
 
 .cosmic-overlay {

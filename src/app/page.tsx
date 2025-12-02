@@ -135,20 +135,20 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    title: "Servicios publicados recientes",
-    description: "Todo lo que los vecis están pidiendo y ofreciendo cerca de ti.",
+    title: "Tareas publicadas cerca de ti",
+    description: "Servicios y tareas activos listos para que postules hoy.",
     variant: "services",
   },
   {
     id: 3,
-    title: "Oficios destacados",
-    description: "Profesionales confiables con reputación impecable en tu zona.",
+    title: "Vecis expertos y profesionales confiables",
+    description: "Profesionales con badges y recomendaciones reales de tu zona.",
     variant: "oficios",
   },
   {
     id: 4,
-    title: "PYMEs que mueven tu barrio",
-    description: "Emprendimientos locales listos para sorprenderte.",
+    title: "PYMEs y emprendedores de tu barrio",
+    description: "Emprendimientos locales con reputación vecinal.",
     variant: "pymes",
   },
 ];
@@ -217,110 +217,193 @@ export default function HomePage() {
   const renderSlide = (slide: Slide) => {
     if (slide.variant === "services") {
       return (
-        <div className="grid gap-4 md:grid-cols-2">
-          {filteredTasks.map((task) => (
-            <div key={task.id} className="card-premium relative overflow-hidden">
-              <div className="absolute right-3 top-3 rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary ring-1 ring-primary/30">
-                {task.tag}
-              </div>
-              <h3 className="text-lg font-semibold text-white">{task.title}</h3>
-              <p className="text-sm text-muted">{task.city} • {task.villa}</p>
-              <div className="mt-4 flex items-center justify-between text-sm text-white">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 ring-1 ring-white/10">
-                  <LocateFixed className="h-4 w-4 text-highlight" /> {task.time}
-                </span>
-                <span className="font-semibold text-primary">{task.price}</span>
-              </div>
+        <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="flex flex-col justify-between gap-6">
+            <div className="space-y-3">
+              <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-highlight ring-1 ring-white/10">
+                Servicios disponibles
+              </p>
+              <h2 className="text-3xl font-bold text-white">Tareas publicadas cerca de ti</h2>
+              <p className="max-w-xl text-white/80">
+                Explora lo que tus vecis necesitan ahora mismo y postula con confianza.
+              </p>
+              <Link
+                href="/explorar"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-highlight px-5 py-3 text-sm font-semibold text-brand-navy ring-1 ring-white/10 shadow-glow"
+              >
+                Ver todos los servicios
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          ))}
-          {filteredTasks.length === 0 && (
-            <p className="text-sm text-muted">No hay tareas en esta ubicación aún. ¡Publica la primera!</p>
-          )}
+            <div className="flex flex-wrap gap-3 text-xs text-white/80">
+              <span className="rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">Cobertura por barrio</span>
+              <span className="rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">Pagos locales y rápidos</span>
+            </div>
+          </div>
+          <div className="relative rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/15 via-highlight/10 to-transparent" aria-hidden />
+            <div className="relative grid gap-4 md:grid-cols-2">
+              {filteredTasks.slice(0, 3).map((task) => (
+                <div key={task.id} className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xl">
+                  <div className="flex items-center justify-between text-xs text-white/70">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
+                      <LocateFixed className="h-4 w-4 text-highlight" /> {task.city} • {task.villa}
+                    </span>
+                    <span className="rounded-full bg-primary/20 px-2 py-1 text-[11px] font-semibold text-primary ring-1 ring-primary/30">
+                      {task.tag}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-white">{task.title}</h3>
+                  <div className="mt-3 flex items-center justify-between text-sm text-white/80">
+                    <span className="rounded-full bg-white/10 px-3 py-2 ring-1 ring-white/10">{task.time}</span>
+                    <span className="font-semibold text-primary">{task.price}</span>
+                  </div>
+                </div>
+              ))}
+              {filteredTasks.length === 0 && (
+                <p className="text-sm text-white/80">No hay tareas en esta ubicación aún. ¡Publica la primera!</p>
+              )}
+            </div>
+          </div>
         </div>
       );
     }
 
     if (slide.variant === "oficios") {
       return (
-        <div className="grid gap-4 md:grid-cols-3">
-          {filteredProfessionals.map((pro) => (
-            <div key={pro.id} className="card-premium space-y-3">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold text-highlight">{pro.badge}</p>
-                <BadgeCheck className="h-5 w-5 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-white">{pro.name}</h3>
-              <p className="text-sm text-muted">{pro.specialty}</p>
-              <p className="text-xs text-muted">{pro.city} • {pro.villa}</p>
-              <div className="flex items-center justify-between rounded-2xl bg-white/5 px-3 py-2 text-sm">
-                <span className="text-muted">Desde</span>
-                <span className="font-semibold text-primary">{pro.price}</span>
-              </div>
+        <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="flex flex-col justify-between gap-6">
+            <div className="space-y-3">
+              <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-highlight ring-1 ring-white/10">
+                Oficios / profesionales
+              </p>
+              <h2 className="text-3xl font-bold text-white">Vecis expertos y profesionales confiables</h2>
+              <p className="max-w-xl text-white/80">Agenda con especialistas con reputación validada en tu comunidad.</p>
+              <Link
+                href="/profesionales"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-highlight px-5 py-3 text-sm font-semibold text-brand-navy ring-1 ring-white/10 shadow-glow"
+              >
+                Ver directorio de profesionales
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          ))}
-          {filteredProfessionals.length === 0 && <p className="text-sm text-muted">Pronto verás especialistas en tu zona.</p>}
+            <div className="flex flex-wrap gap-3 text-xs text-white/80">
+              <span className="rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">Badges Top Veci</span>
+              <span className="rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">Recomendados por tu barrio</span>
+            </div>
+          </div>
+          <div className="relative rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-highlight/10 via-primary/10 to-transparent" aria-hidden />
+            <div className="relative grid gap-4 md:grid-cols-3">
+              {filteredProfessionals.slice(0, 3).map((pro) => (
+                <div key={pro.id} className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xl">
+                  <div className="flex items-center justify-between text-xs text-white/70">
+                    <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">{pro.city}</span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-1 text-[11px] font-semibold text-primary ring-1 ring-primary/30">
+                      <BadgeCheck className="h-4 w-4" /> {pro.badge ?? "Top Veci"}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-white">{pro.name}</h3>
+                  <p className="text-sm text-white/70">{pro.specialty}</p>
+                  <p className="text-xs text-white/60">{pro.villa}</p>
+                  <div className="mt-3 flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 text-sm text-white">
+                    <span>Desde</span>
+                    <span className="font-semibold text-primary">{pro.price}</span>
+                  </div>
+                </div>
+              ))}
+              {filteredProfessionals.length === 0 && <p className="text-sm text-white/80">Pronto verás especialistas en tu zona.</p>}
+            </div>
+          </div>
         </div>
       );
     }
 
     if (slide.variant === "pymes") {
       return (
-        <div className="grid gap-4 md:grid-cols-3">
-          {filteredPymes.map((pyme) => (
-            <div key={pyme.id} className="card-premium space-y-3">
-              <h3 className="text-xl font-semibold text-white">{pyme.name}</h3>
-              <p className="text-sm text-muted">{pyme.detail}</p>
-              <p className="text-xs text-muted">{pyme.city} • {pyme.villa}</p>
-              <div className="flex items-center gap-2 text-sm text-primary">
-                <HeartHandshake className="h-4 w-4" />
-                Compras que quedan en tu barrio
-              </div>
+        <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="flex flex-col justify-between gap-6">
+            <div className="space-y-3">
+              <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-highlight ring-1 ring-white/10">
+                PYMEs y emprendedores
+              </p>
+              <h2 className="text-3xl font-bold text-white">PYMEs y emprendedores de tu barrio</h2>
+              <p className="max-w-xl text-white/80">Descubre los negocios que mantienen viva la economía local.</p>
+              <Link
+                href="/pymes"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-highlight px-5 py-3 text-sm font-semibold text-brand-navy ring-1 ring-white/10 shadow-glow"
+              >
+                Ver PYMEs destacadas
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          ))}
-          {filteredPymes.length === 0 && <p className="text-sm text-muted">Aún no hay PYMEs aquí. ¡Invita a tu favorito!</p>}
+            <div className="flex flex-wrap gap-3 text-xs text-white/80">
+              <span className="rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">Compras que quedan en tu barrio</span>
+              <span className="rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">Emprendimientos con reputación</span>
+            </div>
+          </div>
+          <div className="relative rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-amber-300/20 via-primary/10 to-transparent" aria-hidden />
+            <div className="relative grid gap-4 md:grid-cols-3">
+              {filteredPymes.slice(0, 3).map((pyme) => (
+                <div key={pyme.id} className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xl">
+                  <h3 className="text-lg font-semibold text-white">{pyme.name}</h3>
+                  <p className="text-sm text-white/70">{pyme.detail}</p>
+                  <p className="text-xs text-white/60">{pyme.city} • {pyme.villa}</p>
+                  <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-highlight ring-1 ring-white/15">
+                    <HeartHandshake className="h-4 w-4" />
+                    Comunidad agradecida
+                  </div>
+                </div>
+              ))}
+              {filteredPymes.length === 0 && <p className="text-sm text-white/80">Aún no hay PYMEs aquí. ¡Invita a tu favorito!</p>}
+            </div>
+          </div>
         </div>
       );
     }
 
     return (
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-highlight ring-1 ring-white/10">
-            Nueva era VeciApp
-          </div>
-          <h1 className="text-4xl font-extrabold leading-tight text-white lg:text-5xl">{slide.title}</h1>
-          <p className="max-w-xl text-lg text-muted">{slide.description}</p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <div className="flex flex-1 items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/10">
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="¿Qué necesitas hoy?"
-                className="w-full bg-transparent text-base text-white placeholder:text-white/50 focus:outline-none"
-              />
-              <button className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow">
-                Buscar
-              </button>
+      <div className="grid min-h-[470px] items-stretch gap-8 rounded-[28px] bg-white/5 p-6 sm:p-8 shadow-2xl ring-1 ring-white/10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="flex flex-col justify-between gap-6">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-highlight ring-1 ring-white/10">
+              Nueva era VeciApp
             </div>
-            <div className="flex flex-wrap gap-3 text-sm font-semibold">
-              {session && (
+            <h1 className="text-4xl font-extrabold leading-tight text-white lg:text-5xl">{slide.title}</h1>
+            <p className="max-w-xl text-lg text-white/80">{slide.description}</p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex flex-1 items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/10">
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="¿Qué necesitas hoy?"
+                  className="w-full bg-transparent text-base text-white placeholder:text-white/50 focus:outline-none"
+                />
+                <button className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow">
+                  Buscar
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-3 text-sm font-semibold">
+                {session && (
+                  <Link
+                    href="/publicar"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-highlight px-5 py-3 text-brand-navy ring-1 ring-white/15"
+                  >
+                    Publicar tarea
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
                 <Link
-                  href="/publicar"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-highlight px-5 py-3 text-brand-navy ring-1 ring-white/15"
+                  href="/ofrecer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-5 py-3 text-white ring-1 ring-white/15"
                 >
-                  Publicar tarea
-                  <ArrowRight className="h-4 w-4" />
+                  Ofrecer mis servicios
                 </Link>
-              )}
-              <Link
-                href="/ofrecer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-5 py-3 text-white ring-1 ring-white/15"
-              >
-                Ofrecer mis servicios
-              </Link>
+              </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-3 text-xs text-muted">
+          <div className="flex flex-wrap gap-3 text-xs text-white/80">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/10">
               <BadgeCheck className="h-4 w-4 text-primary" /> Usuarios verificados
             </span>
@@ -336,7 +419,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-highlight/10 to-transparent" aria-hidden />
           <div className="relative space-y-4">
             <h3 className="text-lg font-semibold text-white">Activación rápida</h3>
-            <div className="space-y-3 text-sm text-muted">
+            <div className="space-y-3 text-sm text-white/80">
               <p>1. Crea tu perfil con reputación real.</p>
               <p>2. Define tu disponibilidad y cobertura.</p>
               <p>3. Conecta con vecis confiables y cobra sin esperas.</p>
@@ -345,7 +428,7 @@ export default function HomePage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 text-primary">24/7</div>
               <div>
                 <p className="font-semibold text-white">Atención premium</p>
-                <p className="text-muted">Tu comunidad, siempre contigo.</p>
+                <p className="text-white/70">Tu comunidad, siempre contigo.</p>
               </div>
             </div>
           </div>
@@ -394,36 +477,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="space-y-6">
-        <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold text-highlight">Empresas y personas que confían en nosotros</p>
-          <h2 className="text-3xl font-bold text-white">Reputación construida en comunidad</h2>
-        </div>
-        <div className="grid gap-4 rounded-3xl bg-white/5 p-6 backdrop-blur-lg ring-1 ring-white/10 lg:grid-cols-2">
-          <div className="flex flex-wrap items-center gap-3">
-            {logos.map((logo) => (
-              <div
-                key={logo}
-                className="flex flex-1 items-center justify-center rounded-2xl bg-white/5 px-4 py-3 text-sm font-semibold text-white ring-1 ring-white/10"
-              >
-                {logo}
-              </div>
-            ))}
-          </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.name} className="card-premium text-sm">
-                <div className="flex items-center gap-2 text-highlight">
-                  <Users className="h-4 w-4" /> {testimonial.city}
-                </div>
-                <p className="mt-2 text-white">“{testimonial.quote}”</p>
-                <p className="mt-3 text-xs text-muted">{testimonial.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="space-y-8 rounded-[30px] bg-white/5 p-8 shadow-xl backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-2 text-center">
           <p className="text-sm font-semibold text-highlight">Economía circular aplicada</p>
@@ -446,6 +499,43 @@ export default function HomePage() {
             title="3️⃣ Reciproca"
             description="Evalúa, mejora la comunidad y fortalece la economía local con cada intercambio."
           />
+        </div>
+      </section>
+
+      <section className="space-y-6">
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-semibold text-highlight">Empresas y personas que confían en VeciApp</p>
+          <h2 className="text-3xl font-bold text-white">Reputación construida en comunidad</h2>
+          <p className="text-white/75">La reputación se construye con cada tarea completada en tu barrio.</p>
+        </div>
+        <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-highlight/10 to-transparent" aria-hidden />
+          <div className="relative space-y-6">
+            <div className="flex flex-wrap gap-3">
+              {logos.map((logo) => (
+                <div
+                  key={logo}
+                  className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/15 shadow-lg"
+                >
+                  {logo}
+                </div>
+              ))}
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.name} className="rounded-3xl border border-white/10 bg-white/10 p-5 text-sm text-white shadow-2xl ring-1 ring-white/10">
+                  <div className="flex items-center justify-between text-xs text-amber-200">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
+                      <Users className="h-4 w-4" /> {testimonial.city}
+                    </span>
+                    <LocateFixed className="h-4 w-4 text-highlight" />
+                  </div>
+                  <p className="mt-3 text-base font-semibold leading-relaxed text-white">“{testimonial.quote}”</p>
+                  <p className="mt-3 text-xs text-white/60">{testimonial.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>

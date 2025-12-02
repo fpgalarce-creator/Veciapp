@@ -12,6 +12,7 @@ export type Location = {
 type SessionData = {
   name?: string;
   email?: string;
+  role?: "user" | "admin";
 };
 
 type AppContextValue = {
@@ -33,8 +34,8 @@ const defaultLocation: Location = {
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setThemeState] = useState<ThemeOption>(() => {
-    if (typeof window === "undefined") return "light";
-    return (localStorage.getItem("veciapp-theme") as ThemeOption | null) ?? "light";
+    if (typeof window === "undefined") return "galaxy";
+    return (localStorage.getItem("veciapp-theme") as ThemeOption | null) ?? "galaxy";
   });
   const [location, setLocationState] = useState<Location>(() => {
     if (typeof window === "undefined") return defaultLocation;
@@ -75,8 +76,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const setLocation = (value: Location) => setLocationState(value);
 
   const login = (data: SessionData) => {
-    setSession(data);
-    localStorage.setItem("veciapp-session", JSON.stringify(data));
+    const sessionData = { role: "user" as const, ...data };
+    setSession(sessionData);
+    localStorage.setItem("veciapp-session", JSON.stringify(sessionData));
   };
 
   const logout = () => {
