@@ -10,7 +10,7 @@ const PymeCard: FC<{ pyme: Pyme }> = ({ pyme }) => {
   const { session } = useAppContext();
 
   return (
-    <article className="card-premium flex min-w-[280px] flex-col gap-3">
+    <article className="card-premium flex min-h-[320px] min-w-[280px] flex-col gap-4">
       <div className="flex items-start justify-between gap-2">
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-wide text-white/70">{pyme.category ?? pyme.type}</p>
@@ -31,9 +31,14 @@ const PymeCard: FC<{ pyme: Pyme }> = ({ pyme }) => {
         ) : (
           <div className="flex h-36 items-center justify-center gap-2 text-white/70">
             <ShoppingBag className="h-5 w-5 text-highlight" />
-            <span className="text-sm">Vitrina en construcción</span>
+            <span className="text-sm">Vitrina lista para productos</span>
           </div>
         )}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), transparent 60%)" }}
+          aria-hidden
+        />
       </div>
       <div className="grid gap-2 text-sm text-white/80">
         <p className="flex items-center gap-2 rounded-2xl bg-white/5 px-3 py-2 ring-1 ring-white/10">
@@ -56,10 +61,21 @@ const PymeCard: FC<{ pyme: Pyme }> = ({ pyme }) => {
         {pyme.website && (
           <Link
             href={pyme.website}
-            className="flex items-center gap-2 rounded-2xl bg-white/5 px-3 py-2 text-highlight ring-1 ring-white/10 hover:text-white"
+            target="_blank"
+            className="flex items-center gap-2 rounded-2xl bg-white/5 px-3 py-2 text-highlight ring-1 ring-white/10 transition hover:text-white"
           >
             <Globe2 className="h-4 w-4" />
             {pyme.website.replace("https://", "")}
+          </Link>
+        )}
+        {pyme.instagram && (
+          <Link
+            href={pyme.instagram}
+            target="_blank"
+            className="flex items-center gap-2 rounded-2xl bg-white/5 px-3 py-2 text-highlight ring-1 ring-white/10 transition hover:text-white"
+          >
+            <Globe2 className="h-4 w-4" />
+            {pyme.instagram.replace("https://", "")}
           </Link>
         )}
         {pyme.products && (
@@ -75,22 +91,32 @@ const PymeCard: FC<{ pyme: Pyme }> = ({ pyme }) => {
             ))}
           </div>
         )}
+        <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
+          <p className="text-xs uppercase tracking-wide text-white/70">Vitrina</p>
+          <div className="mt-2 grid grid-cols-3 gap-2 text-[11px] text-white/75">
+            {(pyme.products ?? ["Producto demo", "Combo veci", "Oferta relámpago"]).slice(0, 3).map((item) => (
+              <div key={item} className="flex h-16 items-center justify-center rounded-xl bg-white/5 text-center ring-1 ring-white/10">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="flex items-center gap-2">
-        <button className="inline-flex flex-1 items-center justify-center rounded-full bg-emerald-400 px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow transition hover:bg-emerald-300">
+      <div className="mt-auto flex items-center gap-2">
+        <button className="inline-flex flex-1 items-center justify-center rounded-full bg-emerald-400 px-4 py-2 text-sm font-semibold text-brand-navy shadow-glow transition hover:-translate-y-0.5 hover:bg-emerald-300">
           Encargar ahora
         </button>
         {session?.role === "admin" && (
           <div className="flex gap-2 text-xs font-semibold text-white">
             <button
               onClick={() => console.log("Editar PyME", pyme.id)}
-              className="rounded-full bg-white/10 px-3 py-2 ring-1 ring-white/20 hover:bg-white/20"
+              className="rounded-full bg-white/10 px-3 py-2 ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
             >
               Editar
             </button>
             <button
               onClick={() => console.log("Eliminar PyME", pyme.id)}
-              className="rounded-full bg-red-500/15 px-3 py-2 text-red-100 ring-1 ring-red-400/30 hover:bg-red-500/25"
+              className="rounded-full bg-red-500/15 px-3 py-2 text-red-100 ring-1 ring-red-400/30 transition hover:-translate-y-0.5 hover:bg-red-500/25"
             >
               Eliminar
             </button>

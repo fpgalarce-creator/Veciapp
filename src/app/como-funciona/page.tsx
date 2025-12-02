@@ -2,21 +2,30 @@ import Link from "next/link";
 import CircularEconomySteps from "@/components/CircularEconomySteps";
 import SectionTitle from "@/components/SectionTitle";
 
-const audiences = [
+const cards = [
   {
     title: "Para quienes piden servicios",
-    description:
-      "Publica lo que necesitas con barrio y horario claro. Elige postulaciones confiables y paga como prefieras cuando la tarea esté lista.",
+    items: [
+      "Publica lo que necesitas con fotos y horarios claros.",
+      "Recibe postulaciones con reputación y notas.",
+      "Acepta a tu veci favorito y coordina el pago.",
+    ],
   },
   {
     title: "Para quienes ofrecen servicios",
-    description:
-      "Muestra tu ficha con especialidad, precio y sectores. Postula a tareas cercanas, responde rápido y gana visibilidad con reseñas reales.",
+    items: [
+      "Postula con un mensaje personalizado y disponibilidad.",
+      "Destaca con badges y reseñas de tu zona.",
+      "Recibe avisos cuando te acepten y confirma horarios.",
+    ],
   },
   {
-    title: "Para PYMEs y comerciantes",
-    description:
-      "Comparte tus horarios, contacto y reparto. Recibe encargos de vecinos, coordina entregas y deja que tu vitrina con reputación hable por ti.",
+    title: "Para PYMEs y comercios",
+    items: [
+      "Muestra tu vitrina, horarios y cobertura.",
+      "Recibe encargos directos y organiza tus repartos.",
+      "Suma reseñas que respalden tu negocio local.",
+    ],
   },
 ];
 
@@ -27,12 +36,20 @@ export default function HowItWorksPage() {
         title="Cómo funciona VeciApp"
         subtitle="Conecta con tu comunidad en tres pasos y entiende tu rol en la economía circular"
       />
-      <CircularEconomySteps />
+      <CircularEconomySteps
+        subtitle="Publica, conecta y reciproca para que el talento local circule con confianza."
+      />
       <div className="grid gap-4 rounded-[28px] bg-white/5 p-6 shadow-2xl ring-1 ring-white/10 md:grid-cols-3">
-        {audiences.map((audience) => (
+        {cards.map((audience) => (
           <div key={audience.title} className="flex flex-col gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
             <h3 className="text-lg font-semibold text-white">{audience.title}</h3>
-            <p className="text-sm text-white/80">{audience.description}</p>
+            <ul className="space-y-2 text-sm text-white/80">
+              {audience.items.map((item) => (
+                <li key={item} className="rounded-xl bg-white/5 px-3 py-2 ring-1 ring-white/10">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>

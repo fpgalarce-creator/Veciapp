@@ -7,7 +7,7 @@ export type Professional = {
   rating: number;
   badge?: string;
   avatar?: string;
-  testimonials?: { quote: string; author: string; role: string }[];
+  testimonials?: { author: string; text: string }[];
 };
 
 export const professionals: Professional[] = [
@@ -22,14 +22,12 @@ export const professionals: Professional[] = [
     avatar: "/images/professionals/maria.jpg",
     testimonials: [
       {
-        quote: "Llegó puntual y dejó todo impecable, se nota la experiencia.",
-        author: "Camilo, administrador de condominio",
-        role: "Cliente",
+        text: "Llegó puntual y dejó todo impecable, se nota la experiencia.",
+        author: "Camilo (condominio Centro)",
       },
       {
-        quote: "Explica cada paso y cobra lo justo.",
-        author: "Patricia, Villa Triana",
-        role: "Vecina",
+        text: "Explica cada paso y cobra lo justo.",
+        author: "Patricia de Villa Triana",
       },
     ],
   },
@@ -44,9 +42,8 @@ export const professionals: Professional[] = [
     avatar: "/images/professionals/carlos.jpg",
     testimonials: [
       {
-        quote: "Dejó mi tablero seguro y ordenado. Recomendado.",
-        author: "Valentina, Centro",
-        role: "Cliente",
+        text: "Dejó mi tablero seguro y ordenado. Recomendado.",
+        author: "Valentina (Centro)",
       },
     ],
   },
@@ -60,9 +57,8 @@ export const professionals: Professional[] = [
     avatar: "/images/professionals/fernanda.jpg",
     testimonials: [
       {
-        quote: "Mi hijo por fin entendió álgebra y subió sus notas.",
-        author: "Andrea, mamá 2º medio",
-        role: "Cliente",
+        text: "Mi hijo por fin entendió álgebra y subió sus notas.",
+        author: "Andrea, mamá de 2º medio",
       },
     ],
   },
@@ -76,9 +72,8 @@ export const professionals: Professional[] = [
     avatar: "/images/professionals/juanpablo.jpg",
     testimonials: [
       {
-        quote: "Dejó el jardín listo para el verano en una mañana.",
-        author: "Rodrigo, Graneros",
-        role: "Cliente",
+        text: "Dejó el jardín listo para el verano en una mañana.",
+        author: "Rodrigo (Graneros)",
       },
     ],
   },
@@ -93,9 +88,8 @@ export const professionals: Professional[] = [
     avatar: "/images/professionals/camila.jpg",
     testimonials: [
       {
-        quote: "Atención delicada, colores premium y conversa bacán.",
-        author: "Sofía, Alameda",
-        role: "Cliente",
+        text: "Atención delicada, colores premium y conversa bacán.",
+        author: "Sofía (Alameda)",
       },
     ],
   },

@@ -6,6 +6,7 @@ export type Pyme = {
   sectors: string;
   category?: string;
   website?: string;
+  instagram?: string;
   phone?: string;
   location?: string;
   products?: string[];
@@ -24,7 +25,7 @@ export const pymes: Pyme[] = [
     phone: "+56 9 1234 5678",
     location: "Villa Triana",
     products: ["Empanadas de pino", "Pastel de choclo", "Pebre fresco"],
-    website: "https://donarosa.veci",
+    website: "https://instagram.com/dona.rosa.veci",
     highlighted: true,
   },
   {
@@ -37,6 +38,8 @@ export const pymes: Pyme[] = [
     phone: "+56 9 8765 4321",
     location: "Villa Cordillera",
     products: ["Pan amasado", "Sopaipillas", "Mermeladas caseras"],
+    instagram: "https://instagram.com/pan.elmolino",
+    website: "https://panmolino.veci",
     highlighted: false,
   },
   {
@@ -62,6 +65,8 @@ export const pymes: Pyme[] = [
     phone: "+56 9 9090 2020",
     location: "Parque Comunal",
     products: ["Flat white", "Brownies", "Cold brew"],
+    instagram: "https://instagram.com/cafecitorodante",
+    website: "https://cafecito.veci",
   },
   {
     id: 5,
@@ -73,6 +78,7 @@ export const pymes: Pyme[] = [
     phone: "+56 9 2288 4433",
     location: "El Tenis",
     products: ["Queso mantecoso", "Longaniza", "Quesillo artesanal"],
+    instagram: "https://instagram.com/frutosdelteniente",
   },
   {
     id: 6,
@@ -84,5 +90,7 @@ export const pymes: Pyme[] = [
     phone: "+56 9 7766 5511",
     location: "Villa Las Rosas",
     products: ["Paletas de fruta", "Helado de pistacho", "Sándwich helado"],
+    instagram: "https://instagram.com/heladoslapradera",
+    website: "https://heladospradera.veci",
   },
 ];

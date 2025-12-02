@@ -9,6 +9,9 @@ export type StepDefinition = {
 
 type Props = {
   className?: string;
+  title?: string;
+  subtitle?: string;
+  steps?: StepDefinition[];
   StepCardComponent?: React.ComponentType<{ icon: LucideIcon; title: string; description: string }>;
 };
 
@@ -30,18 +33,21 @@ const defaultSteps: StepDefinition[] = [
   },
 ];
 
-export default function CircularEconomySteps({ className, StepCardComponent }: Props) {
+export default function CircularEconomySteps({ className, StepCardComponent, steps, title, subtitle }: Props) {
   const Card = StepCardComponent;
+  const displayedSteps = steps ?? defaultSteps;
 
   return (
     <section className={cn("space-y-8 rounded-[30px] bg-white/5 p-8 shadow-xl backdrop-blur-xl ring-1 ring-white/10", className)}>
       <div className="flex flex-col gap-2 text-center">
         <p className="text-sm font-semibold text-highlight">Economía circular aplicada</p>
-        <h2 className="text-3xl font-bold text-white">Sigue tres pasos simples</h2>
-        <p className="text-muted">Publica, conecta y reciproca para fortalecer la confianza en tu barrio.</p>
+        <h2 className="text-3xl font-bold text-white">{title ?? "Sigue tres pasos simples"}</h2>
+        <p className="text-muted">
+          {subtitle ?? "Publica, conecta y reciproca para fortalecer la confianza en tu barrio."}
+        </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3">
-        {defaultSteps.map((step) =>
+        {displayedSteps.map((step) =>
           Card ? (
             <Card key={step.title} icon={step.icon} title={step.title} description={step.description} />
           ) : (
