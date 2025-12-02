@@ -11,7 +11,7 @@ export default function AppProviders({
 }) {
   return (
     <AppProvider>
-      <div className="absolute inset-0 -z-10 bg-radial-grid opacity-60" aria-hidden />
+      <div className="absolute inset-0 -z-10 space-time-grid" aria-hidden />
       <div className="relative z-10 flex min-h-screen flex-col">
         <Navbar />
         <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-6 md:pt-10 lg:pt-14">{children}</main>

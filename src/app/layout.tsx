@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${inter.variable} min-h-screen bg-base text-surface antialiased`}>
+      <body className={`${inter.variable} min-h-screen bg-base text-surface antialiased theme-galaxy`}>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

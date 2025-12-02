@@ -1,5 +1,6 @@
 "use client";
 
+import LocationFilters from "@/components/LocationFilters";
 import ProfessionalCard from "@/components/ProfessionalCard";
 import SectionTitle from "@/components/SectionTitle";
 import { professionals } from "@/data/professionals";
@@ -27,22 +28,26 @@ export default function ProfessionalsPage() {
 
   return (
     <div className="space-y-6">
-      <SectionTitle title="Directorio de oficios y profesionales" subtitle="Encuentra vecis expertos" />
+      <SectionTitle
+        title="Directorio de oficios y profesionales"
+        subtitle="Encuentra vecis expertos con buena reputación y reseñas reales de tu comunidad."
+      />
+      <LocationFilters />
       <div className="section-card space-y-4">
         <div className="grid gap-3 md:grid-cols-2">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por nombre u oficio"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 focus:border-secondary focus:outline-none"
+            className="w-full rounded-2xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 placeholder:text-white/70 focus:outline-none"
           />
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as CategoryFilter)}
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 focus:border-secondary focus:outline-none"
+            className="w-full rounded-2xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 focus:outline-none"
           >
             {categories.map((item) => (
-              <option key={item} value={item}>
+              <option key={item} value={item} className="bg-slate-900">
                 {item}
               </option>
             ))}

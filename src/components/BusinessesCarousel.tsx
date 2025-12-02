@@ -31,7 +31,7 @@ const BusinessesCarousel = ({ businesses }: Props) => {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-highlight">PYMEs destacadas</p>
-          <h2 className="text-2xl font-bold text-white">Negocios locales que llegan a tu puerta</h2>
+          <h2 className="text-2xl font-bold text-white">PYMEs locales que llegan a tu puerta</h2>
         </div>
         <div className="hidden gap-2 md:flex">
           <button

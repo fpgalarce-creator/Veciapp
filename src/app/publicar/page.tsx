@@ -4,6 +4,7 @@ import SectionTitle from "@/components/SectionTitle";
 import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import LocationFilters from "@/components/LocationFilters";
 
 const initialForm = {
   title: "",
@@ -44,6 +45,7 @@ export default function PublishPage() {
         title="Publicar una nueva tarea"
         subtitle="Describe tu necesidad para que los vecis puedan ayudarte"
       />
+      <LocationFilters />
       <form onSubmit={handleSubmit} className="section-card space-y-4">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">

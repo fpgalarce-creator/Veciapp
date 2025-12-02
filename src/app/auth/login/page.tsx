@@ -23,7 +23,12 @@ export default function LoginPage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    login({ email });
+    const isAdmin = email.trim().toLowerCase() === "admin@veciapp.com" && password === "admin123";
+    login({
+      email,
+      name: isAdmin ? "Administrador VeciApp" : undefined,
+      role: isAdmin ? "admin" : "user",
+    });
     router.push("/");
   };
 
@@ -40,6 +45,7 @@ export default function LoginPage() {
         </p>
         <h1 className="text-3xl font-bold">Iniciar sesión</h1>
         <p className="text-sm text-white/80">Ingresa a tu cuenta para publicar tareas, ofrecer servicios y seguir tu reputación.</p>
+        <p className="text-xs text-white/70">Demostración admin: admin@veciapp.com • admin123</p>
       </div>
       <form onSubmit={handleSubmit} className="relative space-y-4 rounded-3xl bg-white/10 p-6 text-white shadow-xl backdrop-blur-xl ring-1 ring-white/15">
         <div className="space-y-2">
