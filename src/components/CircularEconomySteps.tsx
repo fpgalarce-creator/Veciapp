@@ -19,17 +19,17 @@ const defaultSteps: StepDefinition[] = [
   {
     icon: Sparkles,
     title: "1️⃣ Publica",
-    description: "Cuenta lo que necesitas o el servicio que ofreces con transparencia y estilo.",
+    description: "Describe lo que necesitas u ofreces con claridad premium.",
   },
   {
     icon: Building2,
     title: "2️⃣ Conecta",
-    description: "Encuentra vecinos confiables con buena reputación y ubicación precisa.",
+    description: "Recibe coincidencias confiables con reputación y cercanía.",
   },
   {
     icon: HeartHandshake,
     title: "3️⃣ Reciproca",
-    description: "Evalúa, mejora la comunidad y fortalece la economía local con cada intercambio.",
+    description: "Evalúa, paga justo y fortalece la economía circular vecinal.",
   },
 ];
 
@@ -38,28 +38,49 @@ export default function CircularEconomySteps({ className, StepCardComponent, ste
   const displayedSteps = steps ?? defaultSteps;
 
   return (
-    <section className={cn("space-y-8 rounded-[30px] bg-white/5 p-8 shadow-xl backdrop-blur-xl ring-1 ring-white/10", className)}>
-      <div className="flex flex-col gap-2 text-center">
+    <section
+      className={cn(
+        "relative overflow-hidden rounded-[32px] bg-white/5 p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl",
+        "before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_25%_30%,rgba(59,130,246,0.18),transparent_40%),radial-gradient(circle_at_78%_70%,rgba(16,185,129,0.14),transparent_45%)] before:opacity-70",
+        className,
+      )}
+    >
+      <div className="relative flex flex-col gap-2 text-center">
         <p className="text-sm font-semibold text-highlight">Economía circular aplicada</p>
         <h2 className="text-3xl font-bold text-white">{title ?? "Sigue tres pasos simples"}</h2>
         <p className="text-muted">
           {subtitle ?? "Publica, conecta y reciproca para fortalecer la confianza en tu barrio."}
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-3">
-        {displayedSteps.map((step) =>
+      <div className="relative mt-6 grid gap-6 md:grid-cols-3">
+        {displayedSteps.map((step, index) =>
           Card ? (
             <Card key={step.title} icon={step.icon} title={step.title} description={step.description} />
           ) : (
             <article
               key={step.title}
-              className="relative flex flex-col items-center gap-3 rounded-3xl bg-white/5 px-6 py-8 text-center shadow-xl backdrop-blur-xl ring-1 ring-white/10"
+              className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl bg-white/8 p-6 text-left shadow-xl ring-1 ring-white/15"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-highlight ring-1 ring-white/10">
-                <step.icon className="h-6 w-6" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-highlight/10 opacity-70" aria-hidden />
+              <div
+                className="absolute inset-0 opacity-40"
+                style={{
+                  background: `radial-gradient(circle at 30% 30%, rgba(99,102,241,0.16), transparent 45%), radial-gradient(circle at 80% 70%, rgba(16,185,129,0.16), transparent 50%)`,
+                }}
+              />
+              <div className="relative flex items-center justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-highlight ring-1 ring-white/15">
+                  <step.icon className="h-6 w-6" />
+                </div>
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80 ring-1 ring-white/15">
+                  Paso {index + 1}
+                </span>
               </div>
-              <h3 className="text-lg font-semibold text-white">{step.title}</h3>
-              <p className="text-sm text-muted">{step.description}</p>
+              <div className="relative space-y-2">
+                <h3 className="text-xl font-semibold text-white">{step.title}</h3>
+                <p className="text-sm text-white/80">{step.description}</p>
+              </div>
+              <div className="relative mt-auto h-1 rounded-full bg-gradient-to-r from-highlight/60 via-primary/50 to-emerald-400/60" />
             </article>
           ),
         )}

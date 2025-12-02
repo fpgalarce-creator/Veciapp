@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, CheckCircle2, Clock3, ShieldCheck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, BarChart3, CheckCircle2, Clock3, ShieldCheck, Users2, X } from "lucide-react";
 import SectionTitle from "@/components/SectionTitle";
 import { useAppContext } from "@/context/AppContext";
 import { pymes } from "@/data/pymes";
+import { professionals } from "@/data/professionals";
 
 export default function AdminPage() {
   const { tasks, applications, updateApplicationStatus } = useAppContext();
@@ -27,6 +28,7 @@ export default function AdminPage() {
       pending,
       accepted,
       activePymes: pymes.length,
+      professionals: professionals.length,
     };
   }, [applications, tasks]);
 
@@ -40,29 +42,76 @@ export default function AdminPage() {
     <div className="space-y-8">
       <SectionTitle
         title="Panel admin (demo)"
-        subtitle="Juega con postulaciones en memoria y revisa el pulso de la comunidad"
+        subtitle="Estructura lista para conectar con backend y operar en modo premium galaxia"
       />
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="relative overflow-hidden rounded-[28px] bg-white/5 p-6 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/15 via-transparent to-emerald-400/15" aria-hidden />
+        <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-highlight">Panel de administración</p>
+            <h2 className="text-2xl font-bold text-white">Visión ejecutiva</h2>
+            <p className="text-white/75">Indicadores listos para enchufar a APIs reales.</p>
+          </div>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/20">
+            <ShieldCheck className="h-4 w-4 text-emerald-300" /> Demo segura
+          </span>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
         <div className="card-premium flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-wide text-white/70">Tareas publicadas</p>
+          <p className="text-xs uppercase tracking-wide text-white/70">Usuarios</p>
+          <p className="text-3xl font-bold text-white">2.1K</p>
+          <p className="text-sm text-white/70">Cuentas verificadas</p>
+          <button className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/20">
+            <Users2 className="h-4 w-4 text-highlight" /> Ver usuarios
+          </button>
+        </div>
+        <div className="card-premium flex flex-col gap-2">
+          <p className="text-xs uppercase tracking-wide text-white/70">Servicios</p>
           <p className="text-3xl font-bold text-white">{stats.totalTasks}</p>
-          <p className="text-sm text-white/70">Activas en este demo</p>
-        </div>
-        <div className="card-premium flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-wide text-white/70">Postulaciones recibidas</p>
-          <p className="text-3xl font-bold text-white">{stats.totalApplications}</p>
           <p className="text-sm text-white/70">{stats.pending} pendientes</p>
+          <button className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/20">
+            <ArrowRight className="h-4 w-4 text-highlight" /> Ver servicios
+          </button>
         </div>
         <div className="card-premium flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-wide text-white/70">Vecis seleccionados</p>
-          <p className="text-3xl font-bold text-emerald-300">{stats.accepted}</p>
-          <p className="text-sm text-white/70">Aceptados en memoria</p>
+          <p className="text-xs uppercase tracking-wide text-white/70">Profesionales</p>
+          <p className="text-3xl font-bold text-white">{stats.professionals}</p>
+          <p className="text-sm text-white/70">Con badges y reseñas</p>
+          <button className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/20">
+            <ArrowRight className="h-4 w-4 text-highlight" /> Ver profesionales
+          </button>
         </div>
         <div className="card-premium flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-wide text-white/70">PYMEs activas</p>
+          <p className="text-xs uppercase tracking-wide text-white/70">PYMEs</p>
           <p className="text-3xl font-bold text-white">{stats.activePymes}</p>
-          <p className="text-sm text-white/70">Listado demo</p>
+          <p className="text-sm text-white/70">Con vitrina vecinal</p>
+          <button className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/20">
+            <ArrowRight className="h-4 w-4 text-highlight" /> Ver PYMEs
+          </button>
+        </div>
+        <div className="card-premium flex flex-col gap-2">
+          <p className="text-xs uppercase tracking-wide text-white/70">Publicidad / destacados</p>
+          <p className="text-3xl font-bold text-white">12</p>
+          <p className="text-sm text-white/70">Banners listos para rotar</p>
+          <button className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/20">
+            <ArrowRight className="h-4 w-4 text-highlight" /> Gestionar
+          </button>
+        </div>
+        <div className="card-premium flex flex-col gap-3">
+          <p className="text-xs uppercase tracking-wide text-white/70">Estadísticas</p>
+          <div className="space-y-2">
+            {[60, 42, 78, 54].map((value, index) => (
+              <div key={index} className="h-2 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full rounded-full bg-gradient-to-r from-highlight via-primary to-emerald-400" style={{ width: `${value}%` }} />
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 text-xs text-white/70">
+            <BarChart3 className="h-4 w-4 text-highlight" /> Embudo de conversión demo
+          </div>
         </div>
       </div>
 
