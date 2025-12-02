@@ -1,143 +1,124 @@
-"use client";
+import BusinessesCarousel from "@/components/BusinessesCarousel";
+import EarnSection from "@/components/EarnSection";
+import Hero from "@/components/Hero";
+import MapMock from "@/components/MapMock";
+import ProfessionalsSection from "@/components/ProfessionalsSection";
+import ServicesGrid from "@/components/ServicesGrid";
 
-import HeroHome from "@/components/HeroHome";
-import PymeCard from "@/components/PymeCard";
-import ProfessionalCard from "@/components/ProfessionalCard";
-import SectionTitle from "@/components/SectionTitle";
-import ServiceCard from "@/components/ServiceCard";
-import { pymes } from "@/data/pymes";
-import { professionals } from "@/data/professionals";
-import { services } from "@/data/services";
-import Link from "next/link";
-import { useState } from "react";
+const businesses = [
+  {
+    id: 1,
+    name: "Cafetería Andina",
+    address: "Pasaje El Sol 245, Rancagua",
+    whatsapp: "+56 9 1234 5678",
+    schedule: "08:00 - 20:00",
+    image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 2,
+    name: "Verduras San Martín",
+    address: "Av. San Martín 1050, Rancagua",
+    whatsapp: "+56 9 8765 4321",
+    schedule: "09:00 - 18:00",
+    image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 3,
+    name: "Taller Don Luis",
+    address: "Calle Victoria 82, Machalí",
+    whatsapp: "+56 9 5555 1212",
+    schedule: "10:00 - 19:00",
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 4,
+    name: "Panadería La Esquina",
+    address: "Plaza América 12, Rancagua",
+    whatsapp: "+56 9 2222 9090",
+    schedule: "07:30 - 14:00",
+    image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=800&q=80",
+  },
+];
 
-const categories = ["Todos", "Limpieza", "Mascotas", "Jardinería", "Educación", "Otros"] as const;
+const services = [
+  { id: 1, name: "Clases de matemáticas", category: "Educación", sector: "Centro", price: "$15.000 - $25.000", icon: "📚" },
+  { id: 2, name: "Paseo de mascotas", category: "Mascotas", sector: "Oriente", price: "$7.000 - $12.000", icon: "🐾" },
+  { id: 3, name: "Mantención de jardín", category: "Jardinería", sector: "Poniente", price: "$20.000 - $40.000", icon: "🌿" },
+  { id: 4, name: "Limpieza express", category: "Limpieza", sector: "Machalí", price: "$18.000 - $30.000", icon: "✨" },
+  { id: 5, name: "Arreglo de bicicletas", category: "Otros", sector: "Centro", price: "$10.000 - $18.000", icon: "🚲" },
+  { id: 6, name: "Asesoría de redes sociales", category: "Otros", sector: "Virtual", price: "$30.000 - $50.000", icon: "📱" },
+];
 
-type CategoryFilter = typeof categories[number];
+const professionals = [
+  {
+    id: 1,
+    name: "Camila Rivas",
+    role: "Diseñadora UX/UI",
+    rating: 4.9,
+    price: "$45.000",
+    sector: "Remoto",
+    verified: true,
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 2,
+    name: "Diego Vargas",
+    role: "Electricista certificado",
+    rating: 4.8,
+    price: "$25.000",
+    sector: "Rancagua centro",
+    verified: true,
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 3,
+    name: "Javiera Morales",
+    role: "Cuidadora de mascotas",
+    rating: 4.7,
+    price: "$12.000",
+    sector: "Machalí",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 4,
+    name: "Pedro Sandoval",
+    role: "Maestro multifacético",
+    rating: 4.6,
+    price: "$28.000",
+    sector: "Oriente",
+    verified: true,
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 5,
+    name: "Fernanda Pinto",
+    role: "Chef a domicilio",
+    rating: 4.9,
+    price: "$35.000",
+    sector: "Rancagua norte",
+    verified: true,
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 6,
+    name: "Andrés Soto",
+    role: "Mecánico de bicis",
+    rating: 4.5,
+    price: "$18.000",
+    sector: "Centro",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+  },
+];
 
 export default function HomePage() {
-  const [category, setCategory] = useState<CategoryFilter>("Todos");
-
-  const filteredServices =
-    category === "Todos" ? services : services.filter((service) => service.category === category);
-
   return (
-    <div className="space-y-12">
-      <HeroHome />
-
-      <section className="space-y-4">
-        <SectionTitle
-          title="PYMEs destacadas de tu barrio"
-          subtitle="Comercio móvil, productos caseros y emprendedores que se mueven por Rancagua."
-          action={<Link href="/pymes" className="text-sm font-semibold text-secondary">Ver todas</Link>}
-        />
-        <div className="grid gap-4 md:hidden">
-          <div className="flex gap-4 overflow-x-auto pb-3">
-            {pymes.slice(0, 6).map((pyme) => (
-              <PymeCard key={pyme.id} pyme={pyme} />
-            ))}
-          </div>
-        </div>
-        <div className="hidden md:grid md:grid-cols-3 md:gap-4 lg:grid-cols-3">
-          {pymes.slice(0, 6).map((pyme) => (
-            <PymeCard key={pyme.id} pyme={pyme} />
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <SectionTitle
-          title="Servicios publicados cerca de ti"
-          subtitle="Encuentra tareas reales en Rancagua y alrededores"
-          action={
-            <div className="flex flex-wrap gap-2">
-              {categories.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setCategory(item)}
-                  className={`rounded-full px-3 py-2 text-sm font-semibold transition border ${
-                    category === item
-                      ? "bg-primary text-white border-primary"
-                      : "bg-white text-text border-gray-200 hover:border-primary"
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          }
-        />
-        <div className="grid gap-4 md:grid-cols-2">
-          {filteredServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <SectionTitle
-          title="Oficios destacados"
-          subtitle="Vecis con buen historial y reseñas"
-          action={<Link href="/profesionales" className="text-sm font-semibold text-secondary">Ver directorio</Link>}
-        />
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {professionals.slice(0, 4).map((professional) => (
-            <ProfessionalCard key={professional.id} professional={professional} />
-          ))}
-        </div>
-      </section>
-
-      <section className="section-card grid gap-6 md:grid-cols-3">
-        <div className="col-span-3 flex items-center justify-between">
-          <div>
-            <p className="text-sm font-semibold text-secondary">¿Cómo funciona VeciApp?</p>
-            <h3 className="text-2xl font-bold text-text">Sigue tres pasos simples</h3>
-          </div>
-          <Link
-            href="/como-funciona"
-            className="hidden rounded-full border border-secondary px-4 py-2 text-sm font-semibold text-secondary hover:bg-secondary/10 md:inline-flex"
-          >
-            Ver detalle
-          </Link>
-        </div>
-        {["Publica", "Elige", "Evalúa"].map((step, index) => (
-          <div key={step} className="rounded-xl bg-gray-50 p-5">
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-white font-bold">
-              {index + 1}
-            </div>
-            <h4 className="text-lg font-semibold text-text">{step}</h4>
-            <p className="text-gray-600 mt-2">
-              {index === 0 && "Cuenta lo que necesitas o el servicio que ofreces con precio y sector."}
-              {index === 1 && "Revisa perfiles, puntuaciones y elige quién te acompañará en la tarea."}
-              {index === 2 && "Completa el trabajo, paga según acuerden y deja tu reseña para la comunidad."}
-            </p>
-          </div>
-        ))}
-      </section>
-
-      <section className="section-card flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-2">
-          <p className="text-sm font-semibold text-secondary">Listo para partir</p>
-          <h3 className="text-2xl font-bold text-text">Publica tu necesidad o muestra tu talento</h3>
-          <p className="text-gray-600">
-            Crea tu aviso en segundos y conecta con vecinos confiables de Rancagua.
-          </p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/publicar"
-            className="rounded-xl bg-primary px-6 py-3 text-white font-semibold shadow-soft hover:bg-primary/90 transition text-center"
-          >
-            Publicar tarea
-          </Link>
-          <Link
-            href="/ofrecer"
-            className="rounded-xl bg-secondary px-6 py-3 text-white font-semibold shadow-soft hover:bg-secondary/90 transition text-center"
-          >
-            Ofrecer servicios
-          </Link>
-        </div>
-      </section>
+    <div className="space-y-12 pb-6">
+      <Hero />
+      <BusinessesCarousel businesses={businesses} />
+      <EarnSection />
+      <MapMock />
+      <ServicesGrid services={services} />
+      <ProfessionalsSection professionals={professionals} />
     </div>
   );
 }
