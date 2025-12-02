@@ -38,7 +38,7 @@ const ServiceCard: FC<{ service: Service }> = ({ service }) => {
         </div>
       </div>
       <button className="mt-1 inline-flex items-center justify-center rounded-lg bg-secondary px-4 py-2 text-white font-semibold hover:bg-secondary/90 transition">
-        Postular (demo)
+        Postular ahora
       </button>
     </article>
   );

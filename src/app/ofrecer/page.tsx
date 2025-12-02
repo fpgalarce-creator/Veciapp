@@ -19,7 +19,7 @@ export default function OfferPage() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage("Tu perfil de servicios ha sido enviado (demo)");
+    setMessage("Tu perfil de servicios ha sido enviado");
     setForm(initialForm);
   };
 
@@ -92,7 +92,7 @@ export default function OfferPage() {
           </div>
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-text">Foto de perfil (demo)</label>
+          <label className="text-sm font-semibold text-text">Foto de perfil</label>
           <input
             type="file"
             onChange={(e) => setForm({ ...form, photo: e.target.value })}
@@ -107,7 +107,7 @@ export default function OfferPage() {
             required
             className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
           />
-          Acepto las condiciones del servicio (demo)
+          Acepto las condiciones del servicio
         </label>
         <div className="flex items-center justify-end">
           <button
